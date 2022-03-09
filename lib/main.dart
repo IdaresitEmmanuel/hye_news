@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hye_news/infrastructure/news/news_facade.dart';
+import 'package:hye_news/injection.dart';
+import 'package:injectable/injectable.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
+  configureInjection(Environment.prod);
   runApp(const MyApp());
 }
 
@@ -51,6 +56,7 @@ class _MyHomePageState extends State<MyHomePage> {
   int _counter = 0;
 
   void _incrementCounter() {
+    NewsFacade().search("art and culture");
     setState(() {
       // This call to setState tells the Flutter framework that something has
       // changed in this State, which causes it to rerun the build method below
