@@ -3,14 +3,6 @@ import 'dart:convert';
 import 'package:hye_news/domain/news/source.dart';
 
 class Article {
-  final Source source;
-  final String? author;
-  final String? title;
-  final String? description;
-  final String? url;
-  final String? urlToImage;
-  final DateTime? publishedAt;
-  final String? content;
   Article({
     required this.source,
     required this.author,
@@ -21,6 +13,19 @@ class Article {
     required this.publishedAt,
     required this.content,
   });
+
+  final Source source;
+  final String? author;
+  final String? title;
+  final String? description;
+  final String? url;
+  final String? urlToImage;
+  final DateTime? publishedAt;
+  final String? content;
+
+  factory Article.fromJson(String str) => Article.fromMap(json.decode(str));
+
+  String toJson() => json.encode(toMap());
 
   factory Article.fromMap(Map<String, dynamic> json) => Article(
         source: Source.fromMap(json["source"]),
@@ -33,53 +38,14 @@ class Article {
         content: json["content"],
       );
 
-  Map<String, dynamic> toMap() {
-    return {
-      'source': source.toMap(),
-      'author': author,
-      'title': title,
-      'description': description,
-      'url': url,
-      'urlToImage': urlToImage,
-      'publishedAt': publishedAt!.millisecondsSinceEpoch,
-      'content': content,
-    };
-  }
-
-  String toJson() => json.encode(toMap());
-
-  factory Article.fromJson(String source) =>
-      Article.fromMap(json.decode(source));
-
-  @override
-  bool operator ==(Object other) {
-    if (identical(this, other)) return true;
-
-    return other is Article &&
-        other.source == source &&
-        other.author == author &&
-        other.title == title &&
-        other.description == description &&
-        other.url == url &&
-        other.urlToImage == urlToImage &&
-        other.publishedAt == publishedAt &&
-        other.content == content;
-  }
-
-  @override
-  int get hashCode {
-    return source.hashCode ^
-        author.hashCode ^
-        title.hashCode ^
-        description.hashCode ^
-        url.hashCode ^
-        urlToImage.hashCode ^
-        publishedAt.hashCode ^
-        content.hashCode;
-  }
-
-  @override
-  String toString() {
-    return 'Article(source: $source, author: $author, title: $title, description: $description, url: $url, urlToImage: $urlToImage, publishedAt: $publishedAt, content: $content)';
-  }
+  Map<String, dynamic> toMap() => {
+        "source": source.toMap(),
+        "author": author,
+        "title": title,
+        "description": description,
+        "url": url,
+        "urlToImage": urlToImage,
+        "publishedAt": publishedAt!.toIso8601String(),
+        "content": content,
+      };
 }

@@ -4,7 +4,6 @@ import 'package:hye_news/domain/news/news.dart';
 import 'package:hye_news/domain/news/news_failure.dart';
 import 'package:injectable/injectable.dart';
 import 'package:http/http.dart' as http;
-import 'dart:convert';
 
 @Injectable(as: INewsFacade)
 class NewsFacade extends INewsFacade {
@@ -23,7 +22,7 @@ class NewsFacade extends INewsFacade {
           "Content-Type": "application/json",
         });
     if (response.statusCode == 200) {
-      return right(News.fromMap(jsonDecode(response.body)));
+      return right(News.fromJson(response.body));
     }
     return left(const NewsFailure.networkFailure());
   }
@@ -40,7 +39,7 @@ class NewsFacade extends INewsFacade {
           "Content-Type": "application/json",
         });
     if (response.statusCode == 200) {
-      return right(News.fromMap(jsonDecode(response.body)));
+      return right(News.fromJson(response.body));
     }
     return left(const NewsFailure.networkFailure());
   }
@@ -55,7 +54,7 @@ class NewsFacade extends INewsFacade {
           "Content-Type": "application/json",
         });
     if (response.statusCode == 200) {
-      return right(News.fromMap(jsonDecode(response.body)));
+      return right(News.fromJson(response.body));
     }
     return left(const NewsFailure.networkFailure());
   }
@@ -69,21 +68,24 @@ class NewsFacade extends INewsFacade {
           "Authorization": apiKey,
           "Content-Type": "application/json",
         });
+
     if (response.statusCode == 200) {
-      return right(News.fromMap(jsonDecode(response.body)));
+      return right(News.fromJson(response.body));
     }
     return left(const NewsFailure.networkFailure());
   }
 
   @override
   Future<Either<NewsFailure, News>> fetchTopHeadlines() async {
-    final response = await http
-        .get(Uri.parse(baseUrl + headlineEndPoint + "country=ng"), headers: {
-      "Authorization": apiKey,
-      "Content-Type": "application/json",
-    });
+    final response = await http.get(
+        Uri.parse(baseUrl + searchEndPoint + "q=popular, trending"),
+        headers: {
+          "Authorization": apiKey,
+          "Content-Type": "application/json",
+        });
+
     if (response.statusCode == 200) {
-      return right(News.fromJson(jsonDecode(response.body)));
+      return right(News.fromJson(response.body));
     }
     return left(const NewsFailure.networkFailure());
   }
@@ -96,8 +98,23 @@ class NewsFacade extends INewsFacade {
       "Content-Type": "application/json",
     });
     if (response.statusCode == 200) {
-      // print(response.body);
-      return right(News.fromMap(jsonDecode(response.body)));
+      return right(News.fromJson(response.body));
+    }
+    return left(const NewsFailure.networkFailure());
+  }
+
+  @override
+  Future<Either<NewsFailure, News>> fetchHealthHeadlines() async {
+    final response = await http.get(
+        Uri.parse(
+            baseUrl + headlineEndPoint + "country=ng" + "&category=health"),
+        headers: {
+          "Authorization": apiKey,
+          "Content-Type": "application/json",
+        });
+
+    if (response.statusCode == 200) {
+      return right(News.fromJson(response.body));
     }
     return left(const NewsFailure.networkFailure());
   }

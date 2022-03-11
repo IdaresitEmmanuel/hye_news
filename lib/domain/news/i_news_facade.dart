@@ -10,4 +10,5 @@ abstract class INewsFacade {
   Future<Either<NewsFailure, News>> fetchPoliticsHeadlines();
   Future<Either<NewsFailure, News>> fetchBusinessHeadlines();
   Future<Either<NewsFailure, News>> fetchSportsHeadlines();
+  Future<Either<NewsFailure, News>> fetchHealthHeadlines();
 }
