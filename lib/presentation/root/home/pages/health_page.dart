@@ -29,7 +29,10 @@ class _HealthPageState extends State<HealthPage> {
                     endIndent: 20.0,
                   ),
               itemBuilder: (context, index) {
-                return ArticleTile(article: state.health.articles[index]);
+                return ArticleTile(
+                  article: state.health.articles[index],
+                  keyword: "health",
+                );
               });
         }
       },

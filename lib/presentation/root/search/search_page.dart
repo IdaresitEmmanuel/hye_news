@@ -13,6 +13,7 @@ class SearchPage extends StatefulWidget {
 }
 
 class _SearchPageState extends State<SearchPage> {
+  final TextEditingController searchController = TextEditingController();
   @override
   void initState() {
     context.read<NewsBloc>().add(const NewsEvent.clearSearch());
@@ -27,7 +28,9 @@ class _SearchPageState extends State<SearchPage> {
           body: SafeArea(
         child: Column(
           children: [
-            const SearchBar(),
+            SearchBar(
+              searchController: searchController,
+            ),
             Expanded(child: BlocBuilder<NewsBloc, NewsState>(
               builder: (context, state) {
                 if (state.isSearching) {
@@ -40,7 +43,9 @@ class _SearchPageState extends State<SearchPage> {
                     itemCount: state.searchResult.articles.length,
                     itemBuilder: (context, index) {
                       return ArticleTile(
-                          article: state.searchResult.articles[index]);
+                        article: state.searchResult.articles[index],
+                        keyword: searchController.text,
+                      );
                     });
               },
             ))

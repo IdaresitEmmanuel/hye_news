@@ -30,7 +30,9 @@ class _EntertainmentPageState extends State<EntertainmentPage> {
                   ),
               itemBuilder: (context, index) {
                 return ArticleTile(
-                    article: state.entertainment.articles[index]);
+                  article: state.entertainment.articles[index],
+                  keyword: "entertainment",
+                );
               });
         }
       },

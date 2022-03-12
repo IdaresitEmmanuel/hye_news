@@ -5,13 +5,18 @@ import 'package:hye_news/presentation/root/home/pages/news_detail_page.dart';
 import 'package:intl/intl.dart';
 
 class ArticleTile extends StatelessWidget {
-  const ArticleTile({Key? key, required this.article}) : super(key: key);
+  const ArticleTile({Key? key, required this.article, required this.keyword})
+      : super(key: key);
   final Article article;
+  final String keyword;
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () => Navigator.push(context,
-          MaterialPageRoute(builder: (_) => NewsDetailPage(article: article))),
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (_) =>
+                  NewsDetailPage(article: article, keyword: keyword))),
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
         child: Row(

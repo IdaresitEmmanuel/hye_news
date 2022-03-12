@@ -29,7 +29,10 @@ class _SportsPageState extends State<SportsPage> {
                     endIndent: 20.0,
                   ),
               itemBuilder: (context, index) {
-                return ArticleTile(article: state.sports.articles[index]);
+                return ArticleTile(
+                  article: state.sports.articles[index],
+                  keyword: "sports",
+                );
               });
         }
       },

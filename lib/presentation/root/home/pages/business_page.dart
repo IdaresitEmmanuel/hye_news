@@ -29,7 +29,10 @@ class _BusinessPageState extends State<BusinessPage> {
                     endIndent: 20.0,
                   ),
               itemBuilder: (context, index) {
-                return ArticleTile(article: state.business.articles[index]);
+                return ArticleTile(
+                  article: state.business.articles[index],
+                  keyword: "business",
+                );
               });
         }
       },

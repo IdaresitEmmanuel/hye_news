@@ -4,14 +4,13 @@ import 'package:hye_news/application/news/bloc/news_bloc.dart';
 import 'package:hye_news/presentation/core/theme/colors.dart';
 
 class SearchBar extends StatefulWidget {
-  const SearchBar({Key? key}) : super(key: key);
-
+  const SearchBar({Key? key, required this.searchController}) : super(key: key);
+  final TextEditingController searchController;
   @override
   State<SearchBar> createState() => _SearchBarState();
 }
 
 class _SearchBarState extends State<SearchBar> {
-  final TextEditingController _searchController = TextEditingController();
   final ValueNotifier<bool> _clearNotifier = ValueNotifier(false);
   @override
   Widget build(BuildContext context) {
@@ -38,7 +37,7 @@ class _SearchBarState extends State<SearchBar> {
                   ),
                   Expanded(
                     child: TextField(
-                      controller: _searchController,
+                      controller: widget.searchController,
                       onChanged: (value) {
                         if (value.isEmpty) {
                           _clearNotifier.value = false;
@@ -67,7 +66,7 @@ class _SearchBarState extends State<SearchBar> {
                         return isNotEmpty
                             ? InkResponse(
                                 onTap: () {
-                                  _searchController.clear();
+                                  widget.searchController.clear();
                                   _clearNotifier.value = false;
                                   context
                                       .read<NewsBloc>()

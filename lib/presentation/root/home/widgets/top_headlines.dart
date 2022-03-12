@@ -11,8 +11,13 @@ class TopHeadline extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.push(context,
-          MaterialPageRoute(builder: (_) => NewsDetailPage(article: article))),
+      onTap: () => Navigator.push(
+          context,
+          MaterialPageRoute(
+              builder: (_) => NewsDetailPage(
+                    article: article,
+                    keyword: "trending",
+                  ))),
       child: Container(
         margin: const EdgeInsets.only(left: 5, right: 5.0),
         height: 200,

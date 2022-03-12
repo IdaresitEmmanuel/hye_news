@@ -29,7 +29,10 @@ class _PoliticsPageState extends State<PoliticsPage> {
                     endIndent: 20.0,
                   ),
               itemBuilder: (context, index) {
-                return ArticleTile(article: state.politics.articles[index]);
+                return ArticleTile(
+                  article: state.politics.articles[index],
+                  keyword: "politics",
+                );
               });
         }
       },

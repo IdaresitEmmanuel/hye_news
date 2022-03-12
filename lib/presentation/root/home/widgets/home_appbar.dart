@@ -9,36 +9,36 @@ class HomeAppBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 20.0, vertical: 20.0),
-      child: Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-        Column(
+      child: Row(
           crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Text(
-              "Welcome back",
-              style: TextStyle(
-                  color: Colors.black,
-                  fontSize: HDimensions.largeText,
-                  fontWeight: FontWeight.bold),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Image.asset(
+                  "assets/images/hye_new_logo.png",
+                  width: 80.0,
+                ),
+                const SizedBox(height: 10.0),
+                Text(
+                  "Wednessday, March 9th",
+                  style: TextStyle(
+                      color: Theme.of(context).textTheme.caption!.color,
+                      fontSize: HDimensions.caption,
+                      fontWeight: FontWeight.bold),
+                )
+              ],
             ),
-            const SizedBox(height: 5.0),
-            Text(
-              "Wednessday, March 9th",
-              style: TextStyle(
-                  color: Theme.of(context).textTheme.caption!.color,
-                  fontSize: HDimensions.caption,
-                  fontWeight: FontWeight.bold),
+            InkResponse(
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (_) => const SearchPage())),
+              child: Image.asset(
+                "assets/images/search.png",
+                width: 24.0,
+              ),
             )
-          ],
-        ),
-        InkResponse(
-          onTap: () => Navigator.push(
-              context, MaterialPageRoute(builder: (_) => const SearchPage())),
-          child: Image.asset(
-            "assets/images/search.png",
-            width: 24.0,
-          ),
-        )
-      ]),
+          ]),
     );
   }
 }
