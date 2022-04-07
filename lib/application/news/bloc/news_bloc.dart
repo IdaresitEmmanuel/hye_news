@@ -12,6 +12,79 @@ part 'news_bloc.freezed.dart';
 class NewsBloc extends Bloc<NewsEvent, NewsState> {
   final INewsFacade _iNewsFacade;
   NewsBloc(this._iNewsFacade) : super(NewsState.initial());
+  // {
+  //   on<NewsEvent>((event, emit) {
+  //     event.map(
+  //         started: (event) {
+  //           add(const NewsEvent.getHeadlines());
+  //           add(const NewsEvent.getPoliticsFeed());
+  //           add(const NewsEvent.getEntertainmentFeed());
+  //           add(const NewsEvent.getBusinessFeed());
+  //           add(const NewsEvent.getSportsFeed());
+  //           add(const NewsEvent.getHealthFeed());
+  //         },
+  //         search: (event) async* {
+  //           emit(state.copyWith(isSearching: true));
+  //           final result = await _iNewsFacade.search(event.value);
+  //           result.fold((l) {
+  //             emit(state.copyWith());
+  //           }, (r) {
+  //             emit(state.copyWith(isSearching: false, searchResult: r));
+  //           });
+  //         },
+  //         getHeadlines: (event) => getHeadline(event, emit),
+  //         getPoliticsFeed: (event) async* {
+  //           emit(state.copyWith(politicsIsLoading: true));
+  //           final result = await _iNewsFacade.fetchPoliticsHeadlines();
+  //           result.fold((l) {
+  //             emit(state.copyWith());
+  //           }, (r) {
+  //             emit(state.copyWith(politicsIsLoading: false, politics: r));
+  //           });
+  //         },
+  //         getEntertainmentFeed: (event) async* {
+  //           emit(state.copyWith(entertainmentIsLoading: true));
+  //           final result = await _iNewsFacade.fetchEntertainmentHeadlines();
+  //           result.fold((l) {
+  //             emit(state.copyWith());
+  //           }, (r) {
+  //             emit(state.copyWith(
+  //                 entertainmentIsLoading: false, entertainment: r));
+  //           });
+  //         },
+  //         getBusinessFeed: (event) async* {
+  //           emit(state.copyWith(businessIsLoading: true));
+  //           final result = await _iNewsFacade.fetchBusinessHeadlines();
+  //           result.fold((l) {
+  //             emit(state.copyWith());
+  //           }, (r) {
+  //             emit(state.copyWith(businessIsLoading: false, business: r));
+  //           });
+  //         },
+  //         getSportsFeed: (event) async* {
+  //           emit(state.copyWith(sportsIsLoading: true));
+  //           final result = await _iNewsFacade.fetchSportsHeadlines();
+  //           result.fold((l) {
+  //             emit(state.copyWith());
+  //           }, (r) {
+  //             emit(state.copyWith(sportsIsLoading: false, sports: r));
+  //           });
+  //         },
+  //         getHealthFeed: (event) async* {
+  //           emit(state.copyWith(healthIsLoading: true));
+  //           final result = await _iNewsFacade.fetchHealthHeadlines();
+  //           result.fold((l) {
+  //             emit(state.copyWith());
+  //           }, (r) {
+  //             emit(state.copyWith(healthIsLoading: false, health: r));
+  //           });
+  //         },
+  //         clearSearch: (event) async* {
+  //           emit(
+  //               state.copyWith(isSearching: false, searchResult: News.empty()));
+  //         });
+  //   });
+  // }
 
   @override
   Stream<NewsState> mapEventToState(NewsEvent event) async* {

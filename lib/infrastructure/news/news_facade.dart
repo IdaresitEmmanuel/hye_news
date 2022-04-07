@@ -7,20 +7,21 @@ import 'package:http/http.dart' as http;
 
 @Injectable(as: INewsFacade)
 class NewsFacade extends INewsFacade {
+  // final String apiKey = "1d218d8f8dbc43e6af9bad32f6a0d45b";
   final String baseUrl = "https://newsapi.org/v2/";
-  final String apiKey = "1d218d8f8dbc43e6af9bad32f6a0d45b";
   final String headlineEndPoint = "top-headlines?";
   final String searchEndPoint = "everything?";
+  final Map<String, String> headers = {
+    "Authorization": "1d218d8f8dbc43e6af9bad32f6a0d45b",
+    "Content-Type": "application/json"
+  };
 
   @override
   Future<Either<NewsFailure, News>> fetchBusinessHeadlines() async {
     final response = await http.get(
         Uri.parse(
             baseUrl + headlineEndPoint + "country=ng" + "&category=business"),
-        headers: {
-          "Authorization": apiKey,
-          "Content-Type": "application/json",
-        });
+        headers: headers);
     if (response.statusCode == 200) {
       return right(News.fromJson(response.body));
     }
@@ -34,10 +35,7 @@ class NewsFacade extends INewsFacade {
             headlineEndPoint +
             "country=ng" +
             "&category=entertainment"),
-        headers: {
-          "Authorization": apiKey,
-          "Content-Type": "application/json",
-        });
+        headers: headers);
     if (response.statusCode == 200) {
       return right(News.fromJson(response.body));
     }
@@ -49,10 +47,7 @@ class NewsFacade extends INewsFacade {
     final response = await http.get(
         Uri.parse(
             baseUrl + headlineEndPoint + "country=ng" + "&category=politics"),
-        headers: {
-          "Authorization": apiKey,
-          "Content-Type": "application/json",
-        });
+        headers: headers);
     if (response.statusCode == 200) {
       return right(News.fromJson(response.body));
     }
@@ -64,10 +59,7 @@ class NewsFacade extends INewsFacade {
     final response = await http.get(
         Uri.parse(
             baseUrl + headlineEndPoint + "country=ng" + "&category=sports"),
-        headers: {
-          "Authorization": apiKey,
-          "Content-Type": "application/json",
-        });
+        headers: headers);
 
     if (response.statusCode == 200) {
       return right(News.fromJson(response.body));
@@ -79,10 +71,7 @@ class NewsFacade extends INewsFacade {
   Future<Either<NewsFailure, News>> fetchTopHeadlines() async {
     final response = await http.get(
         Uri.parse(baseUrl + searchEndPoint + "q=popular, trending"),
-        headers: {
-          "Authorization": apiKey,
-          "Content-Type": "application/json",
-        });
+        headers: headers);
 
     if (response.statusCode == 200) {
       return right(News.fromJson(response.body));
@@ -92,11 +81,9 @@ class NewsFacade extends INewsFacade {
 
   @override
   Future<Either<NewsFailure, News>> search(String query) async {
-    final response = await http
-        .get(Uri.parse(baseUrl + searchEndPoint + "q=$query"), headers: {
-      "Authorization": apiKey,
-      "Content-Type": "application/json",
-    });
+    final response = await http.get(
+        Uri.parse(baseUrl + searchEndPoint + "q=$query"),
+        headers: headers);
     if (response.statusCode == 200) {
       return right(News.fromJson(response.body));
     }
@@ -108,10 +95,7 @@ class NewsFacade extends INewsFacade {
     final response = await http.get(
         Uri.parse(
             baseUrl + headlineEndPoint + "country=ng" + "&category=health"),
-        headers: {
-          "Authorization": apiKey,
-          "Content-Type": "application/json",
-        });
+        headers: headers);
 
     if (response.statusCode == 200) {
       return right(News.fromJson(response.body));
