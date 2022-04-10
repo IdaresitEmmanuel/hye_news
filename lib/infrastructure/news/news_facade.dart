@@ -2,17 +2,17 @@ import 'package:dartz/dartz.dart';
 import 'package:hye_news/domain/news/i_news_facade.dart';
 import 'package:hye_news/domain/news/news.dart';
 import 'package:hye_news/domain/news/news_failure.dart';
+import 'package:hye_news/infrastructure/news/api_key.dart';
 import 'package:injectable/injectable.dart';
 import 'package:http/http.dart' as http;
 
 @Injectable(as: INewsFacade)
 class NewsFacade extends INewsFacade {
-  // final String apiKey = "1d218d8f8dbc43e6af9bad32f6a0d45b";
   final String baseUrl = "https://newsapi.org/v2/";
   final String headlineEndPoint = "top-headlines?";
   final String searchEndPoint = "everything?";
   final Map<String, String> headers = {
-    "Authorization": "1d218d8f8dbc43e6af9bad32f6a0d45b",
+    "Authorization": apiKey,
     "Content-Type": "application/json"
   };
 
